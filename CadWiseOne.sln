@@ -5,9 +5,40 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E3F94BAE-6ED3-4087-B8ED-7AE3C75BC872}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1C811692-F2CB-4075-914D-DD8569F0572D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CadWiseOneTest", "tests\CadWiseOneTest\CadWiseOneTest.csproj", "{BD6455A8-B820-4B9A-9769-0A3DC9A7BCFA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CadWiseTextReplacer", "src\cadwise_textreplacer\CadWiseTextReplacer.csproj", "{A39328D1-FC69-4B14-9FE7-18DA105D3195}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CadWiseOne", "src\CadWiseOneView\CadWiseOne.csproj", "{F4A1F3D3-1A84-4AB1-B55B-A3B07F6DA1C8}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BD6455A8-B820-4B9A-9769-0A3DC9A7BCFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD6455A8-B820-4B9A-9769-0A3DC9A7BCFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD6455A8-B820-4B9A-9769-0A3DC9A7BCFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD6455A8-B820-4B9A-9769-0A3DC9A7BCFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A39328D1-FC69-4B14-9FE7-18DA105D3195}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A39328D1-FC69-4B14-9FE7-18DA105D3195}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A39328D1-FC69-4B14-9FE7-18DA105D3195}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A39328D1-FC69-4B14-9FE7-18DA105D3195}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4A1F3D3-1A84-4AB1-B55B-A3B07F6DA1C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4A1F3D3-1A84-4AB1-B55B-A3B07F6DA1C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4A1F3D3-1A84-4AB1-B55B-A3B07F6DA1C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4A1F3D3-1A84-4AB1-B55B-A3B07F6DA1C8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BD6455A8-B820-4B9A-9769-0A3DC9A7BCFA} = {1C811692-F2CB-4075-914D-DD8569F0572D}
+		{A39328D1-FC69-4B14-9FE7-18DA105D3195} = {E3F94BAE-6ED3-4087-B8ED-7AE3C75BC872}
+		{F4A1F3D3-1A84-4AB1-B55B-A3B07F6DA1C8} = {E3F94BAE-6ED3-4087-B8ED-7AE3C75BC872}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AA1C960E-8908-429A-89E7-7EB7F2F79592}
