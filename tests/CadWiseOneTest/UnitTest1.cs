@@ -34,7 +34,7 @@ namespace CadWiseOneTest
         public void TextTransformTest()
         {
             var item = new TextFileItem(files[0]);
-            item.TextTransform(-1, false);
+            item.TextTransform(-1, true);
             Assert.IsTrue(File.Exists(item.SaveAsPath));
         }
     }

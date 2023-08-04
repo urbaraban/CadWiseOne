@@ -30,7 +30,35 @@ namespace CadWiseTextReplacer
 
                 while ((ln = file.ReadLine()) != null)
                 {
-                    writer.Write(ln);
+                    int wordlength = 0;
+                    string concat = string.Empty;
+                    string word = string.Empty;
+                    foreach (char c in ln)
+                    {
+                        wordlength += 1;
+                        if (char.IsWhiteSpace(c) == true || char.IsPunctuation(c) == true)
+                        {
+                            if (char.IsPunctuation(c) == false || remove_punctuation == false)
+                            {
+                                concat += c;
+                            }
+
+                            if (word_count < 0 || wordlength < word_count)
+                            {
+                                concat += word;
+                                word = string.Empty;
+                                wordlength = 0;
+                            }
+                        } 
+                        else
+                        {
+                            word += c;
+                        }
+
+                    }
+                    concat += word;
+                    concat += '\n';
+                    writer.Write(concat);
                     counter += 1;
                 }
                 file.Close();
