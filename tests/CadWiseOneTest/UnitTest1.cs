@@ -1,4 +1,6 @@
 using CadWiseTextReplacer;
+using CadWiseTextReplacer.Services;
+using NUnit.Framework.Internal;
 
 namespace CadWiseOneTest
 {
@@ -6,8 +8,9 @@ namespace CadWiseOneTest
     {
         private string[] files = new string[]
         {
-            "C:\\Users\\Urbaraban\\source\\repos\\CadWiseOne\\tests\\CadWiseOneTest\\testfiles\\pim_installmgr.log",
-            "C:\\Users\\Urbaraban\\source\\repos\\CadWiseOne\\tests\\CadWiseOneTest\\testfiles\\Пелевин. Transhumanism Inc.fb2"
+            "testfiles\\polish_notatoin_lib.md",
+            "testfiles\\RESULT_VALGRIND.txt",
+            "testfiles\\Пелевин. Transhumanism Inc.fb2"
         };
 
         [SetUp]
@@ -19,7 +22,7 @@ namespace CadWiseOneTest
         public void TextFileItemLoadTest()
         {
             var item = new TextFileItem(files[0]);
-            Assert.Pass();
+            Assert.IsFalse(item.IsEmpty);
         }
 
         [Test]
@@ -31,11 +34,40 @@ namespace CadWiseOneTest
         }
 
         [Test]
-        public void TextTransformTest()
+        public void TextTransformRemovePunctTest()
         {
             var item = new TextFileItem(files[0]);
-            item.TextTransform(-1, true);
-            Assert.IsTrue(File.Exists(item.SaveAsPath));
+            FileWriting.TextTransform(
+                item.FileInfo.FullName, 
+                item.FileInfo.FullName + "_edited",
+                - 1, true);
+
+            Assert.IsTrue(File.Exists(item.FileInfo.FullName + "_edited"));
+            //File.Delete(item.FileInfo.FullName + "_edited");
+        }
+
+        [Test]
+        public void TextTransformWordLengthText()
+        {
+            var item = new TextFileItem(files[0]);
+            FileWriting.TextTransform(
+                item.FileInfo.FullName,
+                item.FileInfo.FullName + "_edited",
+                5, false);
+
+            Assert.IsTrue(File.Exists(item.FileInfo.FullName + "_edited"));
+        }
+
+        [Test]
+        public void TextTransformWordRemoveAll()
+        {
+            var item = new TextFileItem(files[0]);
+            FileWriting.TextTransform(
+                item.FileInfo.FullName,
+                item.FileInfo.FullName + "_edited",
+                0, true);
+
+            Assert.IsTrue(File.Exists(item.FileInfo.FullName + "_edited"));
         }
     }
 }

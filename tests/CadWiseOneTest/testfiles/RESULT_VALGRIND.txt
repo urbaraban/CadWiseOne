@@ -1,0 +1,119 @@
+==1864== Memcheck, a memory error detector
+==1864== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1864== Using Valgrind-3.18.1-42b08ed5bd-20211015 and LibVEX; rerun with -h for copyright info
+==1864== Command: ./test
+==1864== Parent PID: 1745
+==1864== 
+--1864-- 
+--1864-- Valgrind options:
+--1864--    --leak-check=full
+--1864--    --show-leak-kinds=all
+--1864--    --track-origins=yes
+--1864--    --verbose
+--1864--    --log-file=RESULT_VALGRIND.txt
+--1864-- Contents of /proc/version:
+--1864--   Linux version 5.15.79.1-microsoft-standard-WSL2 (oe-user@oe-host) (x86_64-msft-linux-gcc (GCC) 9.3.0, GNU ld (GNU Binutils) 2.34.0.20200220) #1 SMP Wed Nov 23 01:01:46 UTC 2022
+--1864-- 
+--1864-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
+--1864-- Page sizes: currently 4096, max supported 4096
+--1864-- Valgrind library directory: /usr/libexec/valgrind
+--1864-- Reading syms from /home/urbaraban/rewie/C6_s21_matrix-2/src/test
+--1864-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+--1864--   Considering /usr/lib/debug/.build-id/61/ef896a699bb1c2e4e231642b2e1688b2f1a61e.debug ..
+--1864--   .. build-id is valid
+--1864-- Reading syms from /usr/libexec/valgrind/memcheck-amd64-linux
+--1864--    object doesn't have a symbol table
+--1864--    object doesn't have a dynamic symbol table
+--1864-- Scheduler: using generic scheduler lock implementation.
+--1864-- Reading suppressions file: /usr/libexec/valgrind/default.supp
+==1864== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-1864-by-urbaraban-on-???
+==1864== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-1864-by-urbaraban-on-???
+==1864== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-1864-by-urbaraban-on-???
+==1864== 
+==1864== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==1864== don't want to do, unless you know exactly what you're doing,
+==1864== or are doing some strange experiment):
+==1864==   /usr/bin/vgdb --pid=1864 ...command...
+==1864== 
+==1864== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==1864==   /path/to/gdb ./test
+==1864== and then give GDB the following command
+==1864==   target remote | /usr/bin/vgdb --pid=1864
+==1864== --pid is optional if only one valgrind process is running
+==1864== 
+--1864-- REDIR: 0x402aa60 (ld-linux-x86-64.so.2:strlen) redirected to 0x580bcec2 (???)
+--1864-- REDIR: 0x402a830 (ld-linux-x86-64.so.2:index) redirected to 0x580bcedc (???)
+--1864-- Reading syms from /usr/libexec/valgrind/vgpreload_core-amd64-linux.so
+--1864--    object doesn't have a symbol table
+--1864-- Reading syms from /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
+--1864--    object doesn't have a symbol table
+==1864== WARNING: new redirection conflicts with existing -- ignoring it
+--1864--     old: 0x0402aa60 (strlen              ) R-> (0000.0) 0x580bcec2 ???
+--1864--     new: 0x0402aa60 (strlen              ) R-> (2007.0) 0x0484ee30 strlen
+--1864-- REDIR: 0x4027240 (ld-linux-x86-64.so.2:strcmp) redirected to 0x484fcd0 (strcmp)
+--1864-- REDIR: 0x402afc0 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4853840 (mempcpy)
+--1864-- Reading syms from /usr/lib/x86_64-linux-gnu/libm.so.6
+--1864--   Considering /usr/lib/debug/.build-id/27/e82301dba6c3f644404d504e1bb1c97894b433.debug ..
+--1864--   .. build-id is valid
+--1864-- Reading syms from /usr/lib/x86_64-linux-gnu/libc.so.6
+--1864--   Considering /usr/lib/debug/.build-id/69/389d485a9793dbe873f0ea2c93e02efaa9aa3d.debug ..
+--1864--   .. build-id is valid
+==1864== WARNING: new redirection conflicts with existing -- ignoring it
+--1864--     old: 0x049fbce0 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--1864--     new: 0x049fbce0 (memalign            ) R-> (1017.0) 0x0484e050 aligned_alloc
+==1864== WARNING: new redirection conflicts with existing -- ignoring it
+--1864--     old: 0x049fbce0 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--1864--     new: 0x049fbce0 (memalign            ) R-> (1017.0) 0x0484e020 aligned_alloc
+==1864== WARNING: new redirection conflicts with existing -- ignoring it
+--1864--     old: 0x049fbce0 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--1864--     new: 0x049fbce0 (memalign            ) R-> (1017.0) 0x0484e050 aligned_alloc
+==1864== WARNING: new redirection conflicts with existing -- ignoring it
+--1864--     old: 0x049fbce0 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--1864--     new: 0x049fbce0 (memalign            ) R-> (1017.0) 0x0484e020 aligned_alloc
+--1864-- REDIR: 0x49fe7a0 (libc.so.6:strnlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x49fea60 (libc.so.6:strpbrk) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x49fe360 (libc.so.6:strcmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x4a1cd50 (libc.so.6:wcsnlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x49ff750 (libc.so.6:memset) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x4a1b5c0 (libc.so.6:wcslen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x49ffc90 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x4a1b3f0 (libc.so.6:wcschr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x49fe2e0 (libc.so.6:index) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x49fe9e0 (libc.so.6:rindex) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x49ff620 (libc.so.6:memmove) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+==1864== Preferring higher priority redirection:
+--1864--     old: 0x04af6940 (__memcpy_avx_unalign) R-> (2018.0) 0x04850f90 __memcpy_avx_unaligned_erms
+--1864--     new: 0x04af6940 (__memcpy_avx_unalign) R-> (2018.1) 0x04852880 memmove
+--1864-- REDIR: 0x4a1b470 (libc.so.6:wcscmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x49ffa60 (libc.so.6:stpncpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x4a1ba30 (libc.so.6:wmemchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x49fe8b0 (libc.so.6:strncmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x49ffaf0 (libc.so.6:strcasecmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x49fe4a0 (libc.so.6:strcspn) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x4a1b4f0 (libc.so.6:wcscpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x49fe250 (libc.so.6:strcat) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x49ffbe0 (libc.so.6:strncasecmp_l) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x49ff500 (libc.so.6:bcmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x4a075f0 (libc.so.6:memrchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x4a01090 (libc.so.6:strchrnul) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x49fe410 (libc.so.6:strcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x49ffb90 (libc.so.6:strcasecmp_l) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x49fe720 (libc.so.6:strlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x49fe950 (libc.so.6:strncpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x49ff9d0 (libc.so.6:stpcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x49ff470 (libc.so.6:memchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x49feb80 (libc.so.6:strspn) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x49ff850 (libc.so.6:mempcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x49ffb40 (libc.so.6:strncasecmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x4a01000 (libc.so.6:rawmemchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--1864-- REDIR: 0x4af3790 (libc.so.6:__strrchr_avx2) redirected to 0x484e810 (rindex)
+--1864-- REDIR: 0x49fc5a0 (libc.so.6:calloc) redirected to 0x484d9d0 (calloc)
+--1864-- REDIR: 0x49fb460 (libc.so.6:free) redirected to 0x484b210 (free)
+==1864== 
+==1864== HEAP SUMMARY:
+==1864==     in use at exit: 0 bytes in 0 blocks
+==1864==   total heap usage: 4 allocs, 4 frees, 96 bytes allocated
+==1864== 
+==1864== All heap blocks were freed -- no leaks are possible
+==1864== 
+==1864== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

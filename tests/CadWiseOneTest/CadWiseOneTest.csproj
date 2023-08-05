@@ -21,4 +21,19 @@
     <ProjectReference Include="..\..\src\cadwise_textreplacer\CadWiseTextReplacer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="testfiles\pim_installmgr.log_edit">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="testfiles\polish_notatoin_lib.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="testfiles\RESULT_VALGRIND.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="testfiles\Пелевин. Transhumanism Inc.fb2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
