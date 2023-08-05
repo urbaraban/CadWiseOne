@@ -19,7 +19,8 @@
         <Button DockPanel.Dock="Bottom"
                 Content="Start" 
                 FontSize="16"
-                Command="{Binding ConvertFilesCommand}"/>
+                Command="{Binding ConvertFilesCommand}"
+                Margin="5"/>
         <Separator DockPanel.Dock="Bottom" />
         <Grid DockPanel.Dock="Bottom">
             <Grid.ColumnDefinitions>
@@ -46,7 +47,8 @@
         </Grid>
 
 
-        <ScrollViewer DockPanel.Dock="Top">
+        <ScrollViewer DockPanel.Dock="Top"
+                      VerticalScrollBarVisibility="Auto">
             <ListBox ItemsSource="{Binding TextTasks}"
                      d:ItemsSource="{d:SampleData ItemCount=3}"
                      SelectedItem="{Binding SelectItem}"
@@ -69,6 +71,9 @@
                                         <Label DockPanel.Dock="Left"
                                        Content="{Binding TextTask.Fileinfo.Name}"
                                        FontSize="16"/>
+                                        <CheckBox IsChecked="{Binding IsReady, Mode=OneWay}"
+                                                  IsEnabled="False"
+                                                  VerticalAlignment="Center"/>
                                     </DockPanel>
                                     <Grid>
                                         <Grid.ColumnDefinitions>

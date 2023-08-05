@@ -48,13 +48,6 @@ namespace CadWiseOne.ViewModels
             }
         });
 
-        private void Item_Removed(object? sender, System.EventArgs e)
-        {
-            if (sender is TextFileTask task)
-            {
-                this.TextTasks.Remove(task);
-            }
-        }
 
         public ICommand ConvertFilesCommand => new ActionCommand(async () => {
             if (Process == null || Process.Status > TaskStatus.Running) {
@@ -67,5 +60,13 @@ namespace CadWiseOne.ViewModels
                 });
             }
         });
+
+                private void Item_Removed(object? sender, System.EventArgs e)
+        {
+            if (sender is TextFileTask task)
+            {
+                this.TextTasks.Remove(task);
+            }
+        }
     }
 }

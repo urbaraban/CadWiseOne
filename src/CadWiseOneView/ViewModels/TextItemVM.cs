@@ -12,12 +12,6 @@ namespace CadWiseOne.ViewModels
     {
         public bool IsReady => TextTask.Status;
 
-        public TextFileTask TextTask { get; }
-        public TextItemVM(TextFileTask item)
-        {
-            this.TextTask = item;
-        }
-
         public string FileSavePath
         {
             get => TextTask.FileSavePath;
@@ -26,6 +20,18 @@ namespace CadWiseOne.ViewModels
                 TextTask.FileSavePath = value;
                 OnPropertyChanged(nameof(FileSavePath));
             }
+        }
+
+        public TextFileTask TextTask { get; }
+        public TextItemVM(TextFileTask item)
+        {
+            this.TextTask = item;
+            this.TextTask.TaskEnded += TextTask_TaskEnded;
+        }
+
+        private void TextTask_TaskEnded(object? sender, bool e)
+        {
+            OnPropertyChanged(nameof(IsReady));
         }
 
         public ICommand RemoveCommand => new ActionCommand(() => {

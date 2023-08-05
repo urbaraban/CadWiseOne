@@ -4,6 +4,7 @@ namespace CadWiseTextReplacer
 {
     public class TextFileTask
     {
+        public event EventHandler<bool> TaskEnded;
         public event EventHandler Removed;
 
         public bool IsLoaded => Fileinfo.Exists == true && string.IsNullOrEmpty(this.TextPreview);
@@ -31,11 +32,13 @@ namespace CadWiseTextReplacer
 
         public void Execut(int word_length, bool remove_punctuation)
         {
-            FileWriting.TextTransform(
+            this.Status = FileWriting.TextTransform(
                             this.Fileinfo.FullName,
                             this.FileSavePath,
                             word_length,
                             remove_punctuation);
+
+            TaskEnded?.Invoke(this, this.Status);
         }
 
         public void Remove()
