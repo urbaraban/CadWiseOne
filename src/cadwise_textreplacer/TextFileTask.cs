@@ -3,12 +3,8 @@
 namespace CadWiseTextReplacer
 {
     public class TextFileTask
-    {
-        public event EventHandler<bool> TaskEnded;
-        public event EventHandler Removed;
-
+    { 
         public bool IsLoaded => Fileinfo.Exists == true && string.IsNullOrEmpty(this.TextPreview);
-        public bool Status { get; private set; } = false;
 
         public int LinesCount { get; }
 
@@ -28,22 +24,6 @@ namespace CadWiseTextReplacer
                 LinesCount = File.ReadAllLines(this.Fileinfo.FullName).Length;
                 this.FileSavePath = this.Fileinfo.Directory + "\\" + Path.GetFileNameWithoutExtension(this.Fileinfo.Name) + "_edited" + this.Fileinfo.Extension;
             }
-        }
-
-        public void Execut(int word_length, bool remove_punctuation)
-        {
-            this.Status = FileWriting.TextTransform(
-                            this.Fileinfo.FullName,
-                            this.FileSavePath,
-                            word_length,
-                            remove_punctuation);
-
-            TaskEnded?.Invoke(this, this.Status);
-        }
-
-        public void Remove()
-        {
-            this.Removed?.Invoke(this, EventArgs.Empty);
         }
     }
 }

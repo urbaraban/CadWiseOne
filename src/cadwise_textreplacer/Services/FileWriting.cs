@@ -2,7 +2,7 @@
 {
     public static class FileWriting
     {
-        internal static bool TextTransform(string filepath, string savepath, int word_length, bool remove_punctuation)
+        public static bool TextTransform(string filepath, string savepath, int word_length, bool remove_punctuation)
         {
             if (File.Exists(filepath) == true)
             {
