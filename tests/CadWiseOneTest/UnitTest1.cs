@@ -21,14 +21,14 @@ namespace CadWiseOneTest
         [Test]
         public void TextFileItemLoadTest()
         {
-            var item = new TextFileItem(files[0]);
-            Assert.IsFalse(item.IsEmpty);
+            var item = new TextFileTask(files[0]);
+            Assert.IsTrue(item.IsLoaded);
         }
 
         [Test]
         public void FilePrewiewReadingTest()
         {
-            var item = new TextFileItem(files[0]);
+            var item = new TextFileTask(files[0]);
             Assert.IsNotNull(item.TextPreview);
             Assert.IsNotEmpty(item.TextPreview);
         }
@@ -36,38 +36,27 @@ namespace CadWiseOneTest
         [Test]
         public void TextTransformRemovePunctTest()
         {
-            var item = new TextFileItem(files[0]);
-            FileWriting.TextTransform(
-                item.FileInfo.FullName, 
-                item.FileInfo.FullName + "_edited",
-                - 1, true);
-
-            Assert.IsTrue(File.Exists(item.FileInfo.FullName + "_edited"));
+            var item = new TextFileTask(files[0]);
+            item.Execut(-1, true);
+            Assert.IsTrue(File.Exists(item.FileSavePath));
             //File.Delete(item.FileInfo.FullName + "_edited");
         }
 
         [Test]
         public void TextTransformWordLengthText()
         {
-            var item = new TextFileItem(files[0]);
-            FileWriting.TextTransform(
-                item.FileInfo.FullName,
-                item.FileInfo.FullName + "_edited",
-                5, false);
+            var item = new TextFileTask(files[0]);
+            item.Execut(5, false);
 
-            Assert.IsTrue(File.Exists(item.FileInfo.FullName + "_edited"));
+            Assert.IsTrue(File.Exists(item.FileSavePath));
         }
 
         [Test]
         public void TextTransformWordRemoveAll()
         {
-            var item = new TextFileItem(files[0]);
-            FileWriting.TextTransform(
-                item.FileInfo.FullName,
-                item.FileInfo.FullName + "_edited",
-                0, true);
-
-            Assert.IsTrue(File.Exists(item.FileInfo.FullName + "_edited"));
+            var item = new TextFileTask(files[0]);
+            item.Execut(0, true);
+            Assert.IsTrue(File.Exists(item.FileSavePath));
         }
     }
 }

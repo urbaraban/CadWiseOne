@@ -1,0 +1,119 @@
+==1864== , a memory error detector
+==1864==  (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1864== Using -3.18.1-- and LibVEX; rerun with -h for  info
+==1864== Command: ./test
+==1864== Parent PID: 1745
+==1864== 
+--1864-- 
+--1864--  options:
+--1864--    --leak-check=full
+--1864--    --show-leak-kinds=all
+--1864--    --track-origins=yes
+--1864--    --verbose
+--1864--    --log-file=RESULT_.txt
+--1864--  of /proc/version:
+--1864--   Linux version 5.15.79.1---WSL2 (oe-user@oe-host) (x86_64-msft-linux-gcc (GCC) 9.3.0, GNU ld (GNU ) 2.34.0.) #1 SMP Wed Nov 23 01:01:46 UTC 2022
+--1864-- 
+--1864-- Arch and hwcaps: AMD64, , amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
+--1864-- Page sizes:  4096, max  4096
+--1864--  library : /usr/libexec/valgrind
+--1864-- Reading syms from /home//rewie/C6_s21_matrix-2/src/test
+--1864-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+--1864--    /usr/lib/debug/.build-id/61/.debug ..
+--1864--   .. build-id is valid
+--1864-- Reading syms from /usr/libexec//-amd64-linux
+--1864--    object doesn't have a symbol table
+--1864--    object doesn't have a dynamic symbol table
+--1864-- : using generic  lock .
+--1864-- Reading  file: /usr/libexec//default.supp
+==1864==  : reading from /tmp/vgdb-pipe-from-vgdb-to-1864-by--on-???
+==1864==  : writing to   /tmp/vgdb-pipe-to-vgdb-from-1864-by--on-???
+==1864==  : shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-1864-by--on-???
+==1864== 
+==1864== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==1864== don't want to do, unless you know exactly what you're doing,
+==1864== or are doing some strange ):
+==1864==   /usr/bin/vgdb --pid=1864 ...command...
+==1864== 
+==1864== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==1864==   /path/to/gdb ./test
+==1864== and then give GDB the  command
+==1864==   target remote | /usr/bin/vgdb --pid=1864
+==1864== --pid is  if only one  process is running
+==1864== 
+--1864-- REDIR:  (ld-linux-x86-64.so.2:strlen)  to  (???)
+--1864-- REDIR:  (ld-linux-x86-64.so.2:index)  to  (???)
+--1864-- Reading syms from /usr/libexec//_core-amd64-linux.so
+--1864--    object doesn't have a symbol table
+--1864-- Reading syms from /usr/libexec//_-amd64-linux.so
+--1864--    object doesn't have a symbol table
+==1864== WARNING: new   with  --  it
+--1864--     old:  (strlen              ) R-> (0000.0)  ???
+--1864--     new:  (strlen              ) R-> (2007.0)  strlen
+--1864-- REDIR:  (ld-linux-x86-64.so.2:strcmp)  to  (strcmp)
+--1864-- REDIR:  (ld-linux-x86-64.so.2:mempcpy)  to  (mempcpy)
+--1864-- Reading syms from /usr/lib/x86_64-linux-gnu/libm.so.6
+--1864--    /usr/lib/debug/.build-id/27/.debug ..
+--1864--   .. build-id is valid
+--1864-- Reading syms from /usr/lib/x86_64-linux-gnu/libc.so.6
+--1864--    /usr/lib/debug/.build-id/69/.debug ..
+--1864--   .. build-id is valid
+==1864== WARNING: new   with  --  it
+--1864--     old:  (            ) R-> (1011.0)  memalign
+--1864--     new:  (            ) R-> (1017.0)  aligned_alloc
+==1864== WARNING: new   with  --  it
+--1864--     old:  (            ) R-> (1011.0)  memalign
+--1864--     new:  (            ) R-> (1017.0)  aligned_alloc
+==1864== WARNING: new   with  --  it
+--1864--     old:  (            ) R-> (1011.0)  memalign
+--1864--     new:  (            ) R-> (1017.0)  aligned_alloc
+==1864== WARNING: new   with  --  it
+--1864--     old:  (            ) R-> (1011.0)  memalign
+--1864--     new:  (            ) R-> (1017.0)  aligned_alloc
+--1864-- REDIR:  (libc.so.6:strnlen)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:strpbrk)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:strcmp)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:wcsnlen)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:memset)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:wcslen)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:memcpy@@GLIBC_2.14)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:wcschr)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:index)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:rindex)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:memmove)  to  (_vgnU_ifunc_wrapper)
+==1864==  higher  :
+--1864--     old:  (__memcpy_avx_unalign) R-> (2018.0)  __memcpy_avx__erms
+--1864--     new:  (__memcpy_avx_unalign) R-> (2018.1)  memmove
+--1864-- REDIR:  (libc.so.6:wcscmp)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:stpncpy)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:wmemchr)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:strncmp)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:strcspn)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:wcscpy)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:strcat)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:_l)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:bcmp)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:memrchr)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:strcpy)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:_l)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:strlen)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:strncpy)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:stpcpy)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:memchr)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:strspn)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:mempcpy)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:)  to  (_vgnU_ifunc_wrapper)
+--1864-- REDIR:  (libc.so.6:__strrchr_avx2)  to  (rindex)
+--1864-- REDIR:  (libc.so.6:calloc)  to  (calloc)
+--1864-- REDIR:  (libc.so.6:free)  to  (free)
+==1864== 
+==1864== HEAP SUMMARY:
+==1864==     in use at exit: 0 bytes in 0 blocks
+==1864==   total heap usage: 4 allocs, 4 frees, 96 bytes allocated
+==1864== 
+==1864== All heap blocks were freed -- no leaks are possible
+==1864== 
+==1864== ERROR SUMMARY: 0 errors from 0  (: 0 from 0)
