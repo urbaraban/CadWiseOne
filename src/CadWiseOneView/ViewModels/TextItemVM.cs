@@ -1,5 +1,4 @@
-﻿using CadWiseTextReplacer;
-using CadWiseTextReplacer.Services;
+﻿using CadWiseTextFilter;
 using Microsoft.Xaml.Behaviors.Core;
 using System;
 using System.IO;
@@ -11,7 +10,7 @@ namespace CadWiseOne.ViewModels
 {
     internal class TextItemVM : NotifyModel
     {
-        public event EventHandler Removed;
+
         public event EventHandler<bool> TaskEnded;
 
         public bool IsEnded
@@ -27,36 +26,35 @@ namespace CadWiseOne.ViewModels
 
         public string FileSavePath
         {
-            get => TextTask.FileSavePath;
+            get => TextFile.FileSavePath;
             set
             {
-                TextTask.FileSavePath = value;
+                TextFile.FileSavePath = value;
                 OnPropertyChanged(nameof(FileSavePath));
             }
         }
 
-        public TextFileTask TextTask { get; }
-        public TextItemVM(string filepath)
+        public string DisplayName => TextFile.Fileinfo.Name;
+
+        public string DisplayFullPath => TextFile.Fullpath;
+
+        public string DisplaySavePath
         {
-            this.TextTask = new TextFileTask(filepath);
+            get => TextFile.FileSavePath;
+            set => TextFile.FileSavePath = value;
         }
 
-        public void Execut(int word_length, bool remove_punctuation)
-        {
-            IsEnded = FileWriting.TextTransform(
-                        this.TextTask.Fileinfo.FullName,
-                        this.FileSavePath,
-                        word_length,
-                        remove_punctuation);
-        }
+        public string DisplayPreview => TextFile.TextPreview;
 
-        public void Remove()
+        private TextFile TextFile { get; }
+
+        public TextItemVM(TextFile file)
         {
-            this.Removed?.Invoke(this, EventArgs.Empty);
+            this.TextFile = file;
         }
 
         public ICommand RemoveCommand => new ActionCommand(() => {
-            this.Remove();
+            this.TextFile.Remove();
         });
 
         public ICommand OpenCommand => new ActionCommand(() => {

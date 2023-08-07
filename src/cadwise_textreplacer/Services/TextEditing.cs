@@ -1,4 +1,4 @@
-﻿namespace CadWiseTextReplacer.Services
+﻿namespace CadWiseTextFilter.Services
 {
     internal class TextEditing
     {
@@ -14,10 +14,7 @@
                 }
                 else
                 {
-                    if (word_length < 0 || word.Length < word_length)
-                    {
-                        concat += word;
-                    }
+                    concat = WordCheckIncrement(concat, word, word_length);
 
                     word = string.Empty;
 
@@ -27,9 +24,18 @@
                     }
                 }
             }
-            concat += word;
+            concat = WordCheckIncrement(concat, word, word_length);
             concat += '\n';
             return concat;
+        }
+
+        private static string WordCheckIncrement(string recipient, string increment, int word_length)
+        {
+            if (word_length < 0 || increment.Length < word_length)
+            {
+                recipient += increment;
+            }
+            return recipient;
         }
     }
 }

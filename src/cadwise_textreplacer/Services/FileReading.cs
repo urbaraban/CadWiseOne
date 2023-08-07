@@ -1,4 +1,4 @@
-﻿namespace CadWiseTextReplacer.Services
+﻿namespace CadWiseTextFilter.Services
 {
     internal class FileReading
     {

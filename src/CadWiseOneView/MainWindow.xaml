@@ -3,23 +3,39 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:models="clr-namespace:CadWiseOne.Models"
+        xmlns:services="clr-namespace:CadWiseOne.Services"
         xmlns:viewmodels="clr-namespace:CadWiseOne.ViewModels"
-        xmlns:serv="clr-namespace:CadWiseOne.Services"
         mc:Ignorable="d"
         Title="CadWiseTextEditor" Height="450" Width="400">
     <Window.DataContext>
-        <viewmodels:TextEditorVM/>
+        <models:TextFileManager/>
     </Window.DataContext>
     <Window.Resources>
         <ResourceDictionary>
+            <services:TextItemVMConverter x:Key="TextItemConverter" />
+            <services:TextTaskVMConverter x:Key="TaskConverter" />
         </ResourceDictionary>
     </Window.Resources>
     <DockPanel>
-        <Button DockPanel.Dock="Bottom"
-                Content="Start" 
-                FontSize="16"
-                Command="{Binding ConvertFilesCommand}"
-                Margin="5"/>
+        <Grid DockPanel.Dock="Bottom"
+              Margin="5">
+            <ProgressBar DataContext="{Binding TextTask, Converter={StaticResource TaskConverter}}"
+                         Value="{Binding LinesPosition, Mode=OneWay}"
+                         Maximum="{Binding LinesCount, Mode=OneWay}" />
+            <Button Content="Start" 
+                    FontSize="16"
+                    Background="Transparent"
+                    Command="{Binding ConvertFilesCommand}" />
+            <Button Content="x"
+                    Foreground="Red"
+                    Background="Transparent"
+                    HorizontalAlignment="Right"
+                    DataContext="{Binding TextTask, Converter={StaticResource TaskConverter}}"
+                    Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
+                    Command="{Binding CancelCommand}"/>
+        </Grid>
+
         <Separator DockPanel.Dock="Bottom" />
         <Grid DockPanel.Dock="Bottom">
             <Grid.ColumnDefinitions>
@@ -30,7 +46,8 @@
             <TextBox Text="{Binding WordLength}" 
                      PreviewTextInput="TextBox_PreviewTextInput"
                      MouseWheel="TextBox_MouseWheel"
-                     TextAlignment="Right"/>
+                     TextAlignment="Right"
+                     ToolTip="Длина слова (Можно менять колесиком мыши)"/>
 
             <Button Grid.Column="1"
                 Content="+"
@@ -48,73 +65,72 @@
 
         <ScrollViewer DockPanel.Dock="Top"
                       VerticalScrollBarVisibility="Auto">
-            <ListBox ItemsSource="{Binding TextTasks}"
+            <ListBox ItemsSource="{Binding TextFiles}"
                      d:ItemsSource="{d:SampleData ItemCount=3}"
                      SelectedItem="{Binding SelectItem}"
                      HorizontalAlignment="Stretch"
                      ScrollViewer.VerticalScrollBarVisibility="Auto"
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate DataType="viewmodels:TextItemVM">
-                        <DockPanel LastChildFill="True"
-                                   HorizontalAlignment="Stretch">
-                            <Border BorderThickness="1"
-                                BorderBrush="Gray">
-                                <DockPanel Margin="5">
-                                    <DockPanel DockPanel.Dock="Top">
-                                        <Button DockPanel.Dock="Right"
+                        <Border BorderThickness="1"
+                                BorderBrush="Gray"
+                                DataContext="{Binding ., Converter={StaticResource TextItemConverter}}">
+                            <DockPanel Margin="5">
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Button DockPanel.Dock="Right"
                                                 Content="x"
                                                 Command="{Binding RemoveCommand}"
                                                 Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"/>
-                                        <Label DockPanel.Dock="Left"
-                                       Content="{Binding TextTask.Fileinfo.Name}"
+                                    <Label DockPanel.Dock="Left"
+                                       Content="{Binding DisplayName}"
                                        FontSize="16"/>
-                                        <CheckBox IsChecked="{Binding IsEnded, Mode=OneWay}"
-                                                  IsEnabled="False"
-                                                  VerticalAlignment="Center"/>
-                                    </DockPanel>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1*"/>
-                                            <ColumnDefinition Width="1*" />
-                                            <ColumnDefinition Width="100"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions >
-                                            <RowDefinition />
-                                            <RowDefinition />
-                                            <RowDefinition />
-                                        </Grid.RowDefinitions>
-                                        <TextBox Grid.Column="0"
+                                </DockPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="100"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <TextBox Grid.Column="0"
                                              Grid.Row="0"
                                              Grid.ColumnSpan="3"
                                              TextAlignment="Right"
-                                             Text="{Binding TextTask.Fileinfo.FullName, Mode=OneWay}"
+                                             Text="{Binding DisplayFullPath, Mode=OneWay}"
                                              IsEnabled="False" />
-                                        <TextBox Grid.Column="0"
+                                    <TextBox Grid.Column="0"
                                              Grid.Row="1"
                                              Grid.ColumnSpan="2"
                                              HorizontalContentAlignment="Right"
                                              Margin="0,5"
-                                             Text="{Binding TextTask.FileSavePath}"/>
-                                        <Button Grid.Column="2"
+                                             Text="{Binding DisplaySavePath}"/>
+                                    <Button Grid.Column="2"
                                             Grid.Row="1"
                                             Margin="0,5"
                                             Content="Open" 
                                             Command="{Binding OpenCommand}"/>
-                                        <Expander Grid.Column="0"
+                                    <Expander Grid.Column="0"
                                               Grid.ColumnSpan="3"
                                               Grid.Row="2"
                                               Header="Prewiew"
                                               IsExpanded="False"
                                               Background="LightBlue">
-                                            <TextBlock Text="{Binding TextTask.TextPreview}"
+                                        <TextBlock Text="{Binding DisplayPreview}"
                                                TextWrapping="Wrap"/>
-                                        </Expander>
-                                    </Grid>
-                                </DockPanel>
-                            </Border>
-                        </DockPanel>
-                     
+                                    </Expander>
+                                </Grid>
+                            </DockPanel>
+                        </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

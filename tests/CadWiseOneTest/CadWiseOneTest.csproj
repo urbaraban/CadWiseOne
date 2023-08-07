@@ -18,8 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\CadWiseOneView\CadWiseOne.csproj" />
-    <ProjectReference Include="..\..\src\cadwise_textreplacer\CadWiseTextReplacer.csproj" />
+    <ProjectReference Include="..\..\src\cadwise_textreplacer\CadWiseTextFilter.csproj" />
   </ItemGroup>
 
   <ItemGroup>

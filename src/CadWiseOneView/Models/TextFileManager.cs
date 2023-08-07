@@ -1,21 +1,22 @@
 ﻿using CadWiseOne.Properties;
-using CadWiseTextReplacer;
+using CadWiseOne.ViewModels;
+using CadWiseTextFilter;
 using Microsoft.Win32;
 using Microsoft.Xaml.Behaviors.Core;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace CadWiseOne.ViewModels
+namespace CadWiseOne.Models
 {
-    internal class TextEditorVM : NotifyModel
+    internal class TextFileManager : NotifyModel
     {
-        public ObservableCollection<TextItemVM> TextTasks { get; } = new ObservableCollection<TextItemVM>();
+        public ObservableCollection<TextFile> TextFiles { get; } = new ObservableCollection<TextFile>();
+
         public int WordLength { get; set; } = 8;
         public bool RemovePunctuation { get; set; } = false;
 
-        public TextFileTask SelectItem
+        public TextFile SelectItem
         {
             get => selecteditem_;
             set
@@ -24,13 +25,22 @@ namespace CadWiseOne.ViewModels
                 OnPropertyChanged(nameof(SelectItem));
             }
         }
-        private TextFileTask selecteditem_;
+        private TextFile selecteditem_;
 
-        private Task Process { get; set; }
+        public TextTask TextTask 
+        {
+            get => _texttask;
+            set
+            {
+                _texttask = value;
+                OnPropertyChanged(nameof(TextTask));
+            }
+        }
+        private TextTask _texttask;
 
         public ICommand AddFilesCommand => new ActionCommand(() =>
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            var openFileDialog = new OpenFileDialog();
             openFileDialog.Multiselect = true;
             openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
             openFileDialog.InitialDirectory = Settings.Default.LastFolderPath;
@@ -41,9 +51,9 @@ namespace CadWiseOne.ViewModels
 
                 foreach (string filename in openFileDialog.FileNames)
                 {
-                    var item = new TextItemVM(filename);
+                    var item = new TextFile(filename);
                     item.Removed += Item_Removed;
-                    TextTasks.Add(item);
+                    TextFiles.Add(item);
                 }
             }
         });
@@ -51,23 +61,28 @@ namespace CadWiseOne.ViewModels
 
         public ICommand ConvertFilesCommand => new ActionCommand(async () =>
         {
-            if (Process == null || Process.Status > TaskStatus.Running)
+            if (TextTask == null || TextTask.IsRunning == false)
             {
-                Process = Task.Run(() =>
+                foreach (var file in TextFiles)
                 {
-                    foreach (var task in TextTasks)
-                    {
-                        task.Execut(WordLength, RemovePunctuation);
-                    }
-                });
+                    TextTask = new TextTask(file);
+                    TextTask.Execut(WordLength, RemovePunctuation);
+                }
             }
         });
 
         private void Item_Removed(object? sender, System.EventArgs e)
         {
-            if (sender is TextItemVM task)
+            if (sender is TextFile file)
             {
-                this.TextTasks.Remove(task);
+                for (int i = 0; i < TextFiles.Count; i += 1)
+                {
+                    if (TextFiles[i].Guid == file.Guid)
+                    {
+                        TextFiles.RemoveAt(i);
+                        return;
+                    }
+                }
             }
         }
     }

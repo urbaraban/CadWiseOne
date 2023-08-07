@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\cadwise_textreplacer\CadWiseTextReplacer.csproj" />
+    <ProjectReference Include="..\cadwise_textreplacer\CadWiseTextFilter.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1C811692
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CadWiseOneTest", "tests\CadWiseOneTest\CadWiseOneTest.csproj", "{BD6455A8-B820-4B9A-9769-0A3DC9A7BCFA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CadWiseTextReplacer", "src\cadwise_textreplacer\CadWiseTextReplacer.csproj", "{A39328D1-FC69-4B14-9FE7-18DA105D3195}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CadWiseTextFilter", "src\cadwise_textreplacer\CadWiseTextFilter.csproj", "{A39328D1-FC69-4B14-9FE7-18DA105D3195}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CadWiseOne", "src\CadWiseOneView\CadWiseOne.csproj", "{F4A1F3D3-1A84-4AB1-B55B-A3B07F6DA1C8}"
 EndProject
